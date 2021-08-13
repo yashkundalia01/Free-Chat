@@ -1,25 +1,47 @@
-import logo from './logo.svg';
 import './App.css';
+import Welcome from './components/Welcome/Welcome';
+import Register from './components/Auth/Register';
+import Login from './components/Auth/Login';
+import Alert from './components/UI/Alert/Alert';
+import Layout from './Container/Layout/Layout';
+import { Component } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import setAuthToken from './utils/setAuthToken';
+import { loadUser } from './store/actions/index';
+import { connect } from 'react-redux';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  componentDidMount() {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    this.props.getUser();
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <div className='App'>
+          <Layout>
+            <Route exact path='/' component={Welcome} />
+            <section className='container'>
+              <Alert />
+              <Switch>
+                <Route exact path='/register' component={Register} />
+                <Route exact path='/login' component={Login} />
+              </Switch>
+            </section>
+          </Layout>
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUser: () => dispatch(loadUser()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);
