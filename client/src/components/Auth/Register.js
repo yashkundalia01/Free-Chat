@@ -1,15 +1,17 @@
-import { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import './style.css';
-import { connect } from 'react-redux';
-import * as action from '../../store/actions/index';
+import { Component } from "react";
+import { Link, Redirect } from "react-router-dom";
+import "./style.css";
+import { connect } from "react-redux";
+import * as action from "../../store/actions/index";
+import Spinner from "../UI/Spinner/Spinner";
 
 class Register extends Component {
   state = {
-    name: '',
-    email: '',
-    password: '',
-    password2: '',
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
+    loading: false,
   };
 
   onChangeHandler = (e) =>
@@ -19,19 +21,29 @@ class Register extends Component {
     });
 
   onSubmitHandler = (e) => {
+    this.setState({ ...this.state, loading: true });
     const { name, email, password } = this.state;
     e.preventDefault();
-    if (this.state.password === this.state.password2)
-      this.props.register({ name, email, password });
-    else this.props.setAlert('Passwords do not match', 'danger');
+    if (this.state.password === this.state.password2) {
+      try {
+        this.props.register({ name, email, password });
+      } catch (error) {
+        this.setState({ ...this.state, loading: false });
+      }
+    } else this.props.setAlert("Passwords do not match", "danger");
   };
 
   render() {
+    let loading = null;
+    if (this.state.loading) {
+      loading = <Spinner></Spinner>;
+    }
     if (this.props.isAuthenticated) {
-      return <Redirect to='/dashboard' />;
+      return <Redirect to='/profile' />;
     }
     return (
       <div>
+        <div className='loading'>{loading}</div>
         <h1 className='large'>Sign Up</h1>
         <p className='lead'>Create Your Account</p>
         <form className='form' onSubmit={(e) => this.onSubmitHandler(e)}>

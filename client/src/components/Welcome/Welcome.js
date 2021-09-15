@@ -1,6 +1,6 @@
-import { Component } from 'react';
-import './Welcome.css';
-import { Link } from 'react-router-dom';
+import { Component } from "react";
+import "./Welcome.css";
+import { Link } from "react-router-dom";
 
 class Welcome extends Component {
   render() {
@@ -10,9 +10,7 @@ class Welcome extends Component {
           <div className='dark-overlay'>
             <div className='background-inner'>
               <h1 className='x-large'>Free Chat</h1>
-              <p className='lead'>
-                Create a profile, chat with your friends and share your posts.
-              </p>
+              <p className='lead'>Create a profile, chat with your friends.</p>
               <div>
                 <Link to='/register' className='btn btn-primary'>
                   Sign Up

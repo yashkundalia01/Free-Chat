@@ -1,8 +1,8 @@
-import React from 'react';
-import './Toolbar.css';
-import Logo from '../../Logo/Logo';
-import NavigationItems from '../../Navigation/NavigationItems/NavigationItems';
-import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
+import React from "react";
+import "./Toolbar.css";
+import Logo from "../../Logo/Logo";
+import NavigationItems from "../../Navigation/NavigationItems/NavigationItems";
+import DrawerToggle from "../SideDrawer/DrawerToggle/DrawerToggle";
 
 const toolbar = (props) => {
   return (

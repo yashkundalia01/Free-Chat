@@ -1,13 +1,15 @@
-import { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import './style.css';
-import { connect } from 'react-redux';
-import { login } from '../../store/actions/index';
+import { Component } from "react";
+import { Link, Redirect } from "react-router-dom";
+import "./style.css";
+import { connect } from "react-redux";
+import { login } from "../../store/actions/index";
+import Spinner from "../UI/Spinner/Spinner";
 
 class Login extends Component {
   state = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
+    loading: false,
   };
 
   onChangeHandler = (e) =>
@@ -17,17 +19,26 @@ class Login extends Component {
     });
 
   onSubmitHandler = (e) => {
+    this.setState({ ...this.state, loading: true });
     e.preventDefault();
-    this.props.loginUser(this.state.email, this.state.password);
+    try {
+      this.props.loginUser(this.state.email, this.state.password);
+    } catch (error) {
+      this.setState({ ...this.state, loading: false });
+    }
   };
 
   render() {
+    let loading = null;
+    if (this.state.loading) {
+      loading = <Spinner></Spinner>;
+    }
     if (this.props.isAuthenticated) {
       return <Redirect to='/dashboard' />;
     }
     return (
       <div>
-        {/* <div className='alert alert-danger'>Invalid credentials</div> */}
+        <div className='loading'>{loading}</div>
         <h1 className='large text-primary'>Sign In</h1>
         <p className='lead'>Sign into Your Account</p>
         <form className='form' onSubmit={(e) => this.onSubmitHandler(e)}>
