@@ -19,6 +19,7 @@ class Login extends Component {
     });
 
   onSubmitHandler = (e) => {
+    localStorage.setItem("password", this.state.password);
     this.setState({ ...this.state, loading: true });
     e.preventDefault();
     try {

@@ -26,7 +26,7 @@ class Dashboard extends Component {
     if (allProfiles) {
       friendList = allProfiles.map((friend) => {
         return (
-          <a href={"/chat?" + "id=" + friend._id}>
+          <a href={"/video?" + "id=" + friend._id}>
             <div className='friend profile bg-light' key={friend._id}>
               <img className='round-img' src={friend.imageUrl} alt='Loading' />
               <div>

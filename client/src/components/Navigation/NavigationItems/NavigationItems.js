@@ -12,6 +12,12 @@ class navigationItems extends Component {
 
     const authLinks = (
       <ul className='NavigationItems'>
+        <a style={myStyle} href='/chat'>
+          Chat
+        </a>
+        <a style={myStyle} href='/post'>
+          Post
+        </a>
         <a style={myStyle} href='/profile'>
           Profile
         </a>

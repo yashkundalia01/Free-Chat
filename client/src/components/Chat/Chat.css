@@ -54,7 +54,7 @@
 }
 
 .chatbox {
-  height: 500px;
+  height: 50%;
   width: 100%;
   margin-left: 25px;
   border: #ccc 2px solid;
@@ -93,4 +93,38 @@
     margin-top: 20px;
     margin-left: 0;
   }
+}
+/* ------------- */
+.btn12 {
+  display: inline-block;
+  background: var(--light-color);
+  color: #333;
+  padding: 0.4rem 1.3rem;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: opacity 0.2s ease-in;
+  outline: none;
+  border-radius: 4px;
+}
+
+.btn12-primary {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.btn12:hover {
+  opacity: 0.8;
+}
+.form123 {
+  display: flex;
+  padding: 2px;
+}
+.form123 input{
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+  margin-right: 2px;
 }

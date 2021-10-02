@@ -48,7 +48,12 @@ export const getProfiles = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
-  const res = await axios.get("/api/profile");
+  const config = {
+    headers: {
+      "x-auth-token": localStorage.token,
+    },
+  };
+  const res = await axios.get("/api/profile", config);
   const profiles = res.data;
   dispatch({ type: PROFILES_LOADED, payload: profiles });
 };

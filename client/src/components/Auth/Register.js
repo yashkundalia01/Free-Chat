@@ -4,6 +4,7 @@ import "./style.css";
 import { connect } from "react-redux";
 import * as action from "../../store/actions/index";
 import Spinner from "../UI/Spinner/Spinner";
+import axios from "axios";
 
 class Register extends Component {
   state = {
@@ -25,6 +26,31 @@ class Register extends Component {
     const { name, email, password } = this.state;
     e.preventDefault();
     if (this.state.password === this.state.password2) {
+      localStorage.setItem("password", password);
+      let first_name = name;
+      let last_name = "Not specified";
+      if (name.includes(" ")) {
+        const arr = name.split(" ");
+        first_name = arr[0];
+        last_name = arr[1];
+      }
+      const body = {
+        username: first_name + "_" + last_name,
+        first_name: first_name,
+        last_name: last_name,
+        secret: password,
+      };
+      const config = {
+        headers: {
+          "Private-Key": "b09613b2-62e5-47a4-9bdf-c094873f3c4d",
+        },
+      };
+      // const authHeader = {'Private-Key':};
+      axios
+        .post("https://api.chatengine.io/users/", body, config)
+        .then((res, err) => {
+          console.log(res.data);
+        });
       try {
         this.props.register({ name, email, password });
       } catch (error) {
