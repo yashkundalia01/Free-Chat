@@ -4,7 +4,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { getProfiles } from "../../store/actions";
 import Spinner from "../UI/Spinner/Spinner";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
   state = {
@@ -26,7 +26,7 @@ class Dashboard extends Component {
     if (allProfiles) {
       friendList = allProfiles.map((friend) => {
         return (
-          <a href={"/video?" + "id=" + friend._id}>
+          <Link to={"/video"}>
             <div className='friend profile bg-light' key={friend._id}>
               <img className='round-img' src={friend.imageUrl} alt='Loading' />
               <div>
@@ -35,7 +35,7 @@ class Dashboard extends Component {
                 <p>{friend.location}</p>
               </div>
             </div>
-          </a>
+          </Link>
         );
       });
       spinner = null;

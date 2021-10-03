@@ -12,6 +12,7 @@ import { loadUser } from "./store/actions/index";
 import { connect } from "react-redux";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Chat from "./components/Chat/Chat";
+import Video from "./components/Video/Video";
 
 class App extends Component {
   componentDidMount() {
@@ -35,6 +36,7 @@ class App extends Component {
                 <Route exact path='/dashboard' component={Dashboard} />
                 <Route exact path='/profile' component={Profile} />
                 <Route exact path='/chat' component={Chat} />
+                <Route exact path='/video' component={Video} />
               </Switch>
             </section>
           </Layout>

@@ -1,6 +1,7 @@
 import { Fragment, Component } from "react";
 import "./NavigationItems.css";
 import NavigationItem from "./NavigationItem/NavigationItem";
+import { Link } from "react-router-dom";
 
 class navigationItems extends Component {
   render() {
@@ -12,18 +13,18 @@ class navigationItems extends Component {
 
     const authLinks = (
       <ul className='NavigationItems'>
-        <a style={myStyle} href='/chat'>
+        <Link to='/chat' style={myStyle}>
           Chat
-        </a>
-        <a style={myStyle} href='/post'>
+        </Link>
+        <Link to='/post' style={myStyle}>
           Post
-        </a>
-        <a style={myStyle} href='/profile'>
+        </Link>
+        <Link to='/profile' style={myStyle}>
           Profile
-        </a>
-        <a style={myStyle} onClick={this.props.logout} href='/login'>
+        </Link>
+        <Link onClick={this.props.logout} to='/login' style={myStyle}>
           Logout
-        </a>
+        </Link>
       </ul>
     );
     const guestLinks = (
