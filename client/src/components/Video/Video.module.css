@@ -42,6 +42,9 @@
 .videoContainer > div {
 	margin: 10px;
 }
+.myVideo{
+	width: 300px;
+}
 
 .caller {
 	text-align: center;
@@ -50,15 +53,14 @@
 
 .cnt {
 	margin: auto;
-	width: 1000px;
 	background: var(--primary-color);; /* fallback for old browsers */
 	border-radius: 35px;
 	padding: 10px;
+	margin-bottom: 2rem;
 }
 
 @media (max-width: 499px) {
 	.cnt {
-		width: 400px;
 		border-radius: 0px;
 		justify-content: center;
 		align-items: center;
@@ -69,5 +71,14 @@
 	}
 	.videoContainer{
 		flex-direction: column;
+		margin: auto;
+		
+	}
+	.myVideo{
+		width: 230px;
+		height: 200px;
+	}
+	.myId{
+		width: fit-content;
 	}
   }

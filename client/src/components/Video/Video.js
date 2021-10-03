@@ -10,6 +10,7 @@ import io from "socket.io-client";
 import classes from "./Video.module.css";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import Chat from "../Chat/Chat";
 
 const socket = io.connect("http://localhost:5000");
 const Video = (props) => {
@@ -25,7 +26,6 @@ const Video = (props) => {
   const myVideo = useRef();
   const userVideo = useRef();
   const connectionRef = useRef();
-
 
   useEffect(() => {
     if (props.user) {
@@ -102,86 +102,95 @@ const Video = (props) => {
     connectionRef.current.destroy();
   };
   return (
-    <div className={classes.cnt}>
-      <h1 style={{ textAlign: "center", color: "#fff" }}>Video Call</h1>
-      <div className={classes.container}>
-        <div className={classes.videoContainer}>
-          <div className={classes.video}>
-            {stream && (
-              <video
-                playsInline
-                muted
-                ref={myVideo}
-                autoPlay
-                style={{ width: "300px" }}
-              />
-            )}
+    <React.Fragment>
+      <div className={classes.cnt}>
+        <h1 style={{ textAlign: "center", color: "#fff" }}>Video Call</h1>
+        <div className={classes.container}>
+          <div className={classes.videoContainer}>
+            <div className={classes.video}>
+              {stream && (
+                <video className={classes.myVideo}
+                  playsInline
+                  muted
+                  ref={myVideo}
+                  autoPlay
+                />
+              )}
+            </div>
+            <div className={classes.video}>
+              {callAccepted && !callEnded ? (
+                <video className={classes.myVideo}
+                  playsInline
+                  ref={userVideo}
+                  autoPlay
+                />
+              ) : null}
+            </div>
           </div>
-          <div className={classes.video}>
-            {callAccepted && !callEnded ? (
-              <video
-                playsInline
-                ref={userVideo}
-                autoPlay
-                style={{ width: "300px" }}
-              />
+          <div className={classes.myId}>
+            <TextField
+              id="filled-basic"
+              label="Name"
+              variant="filled"
+              value={name}
+              style={{ marginBottom: "20px" }}
+            />
+            <CopyToClipboard text={me} style={{ marginBottom: "2rem" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<AssignmentIcon fontSize="large" />}
+              >
+                Copy ID
+              </Button>
+            </CopyToClipboard>
+
+            <TextField
+              id="filled-basic"
+              label="ID to call"
+              variant="filled"
+              value={idToCall}
+              onChange={(e) => setIdToCall(e.target.value)}
+            />
+            <div className={classes.callButton}>
+              {callAccepted && !callEnded ? (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={leaveCall}
+                >
+                  End Call
+                </Button>
+              ) : (
+                <IconButton
+                  color="primary"
+                  aria-label="call"
+                  onClick={() => callUser(idToCall)}
+                >
+                  <PhoneIcon fontSize="large" />
+                </IconButton>
+              )}
+              {idToCall}
+            </div>
+          </div>
+          <div>
+            {receivingCall && !callAccepted ? (
+              <div className={classes.caller}>
+                <h1>{name} is calling...</h1>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={answerCall}
+                >
+                  Answer
+                </Button>
+              </div>
             ) : null}
           </div>
         </div>
-        <div className={classes.myId}>
-          <TextField
-            id="filled-basic"
-            label="Name"
-            variant="filled"
-            value={name}
-            style={{ marginBottom: "20px" }}
-          />
-          <CopyToClipboard text={me} style={{ marginBottom: "2rem" }}>
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<AssignmentIcon fontSize="large" />}
-            >
-              Copy ID
-            </Button>
-          </CopyToClipboard>
-
-          <TextField
-            id="filled-basic"
-            label="ID to call"
-            variant="filled"
-            value={idToCall}
-            onChange={(e) => setIdToCall(e.target.value)}
-          />
-          <div className={classes.callButton}>
-            {callAccepted && !callEnded ? (
-              <Button variant="contained" color="secondary" onClick={leaveCall}>
-                End Call
-              </Button>
-            ) : (
-              <IconButton
-                color="primary"
-                aria-label="call"
-                onClick={() => callUser(idToCall)}
-              >
-                <PhoneIcon fontSize="large" />
-              </IconButton>
-            )}
-            {idToCall}
-          </div>
-        </div>
-        <div>
-          {receivingCall && !callAccepted ? (
-            <div className={classes.caller}>
-              <h1>{name} is calling...</h1>
-              <Button variant="contained" color="primary" onClick={answerCall}>
-                Answer
-              </Button>
-            </div>
-          ) : null}
-        </div>
       </div>
-    </div>
+      <Chat />
+    </React.Fragment>
   );
 };
 
