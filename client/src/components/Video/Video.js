@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Chat from "../Chat/Chat";
 
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect("https://dry-taiga-91923.herokuapp.com");
 const Video = (props) => {
   const [me, setMe] = useState("");
   const [stream, setStream] = useState();
