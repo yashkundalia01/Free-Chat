@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import storage from "../../firebase/index";
 import * as action from "../../store/actions/index";
 import Spinner from "../UI/Spinner/Spinner";
@@ -120,9 +120,9 @@ class Profile extends Component {
           </div>
 
           <input type='submit' className='btn btn-primary my-1' />
-          <a className='btn btn-light my-1' href='/dashboard'>
+          <Link className='btn btn-light my-1' to='/dashboard'>
             Go Dashboard
-          </a>
+          </Link>
           <a
             className='btn btn-danger my-1'
             onClick={() => this.deleteAccount()}
