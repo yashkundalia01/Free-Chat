@@ -51,7 +51,7 @@ const Video = (props) => {
   }, []);
 
   if (!localStorage.token) {
-    return <Redirect to="/login" />;
+    return <Redirect to='/login' />;
   }
 
   const callUser = (id) => {
@@ -109,7 +109,8 @@ const Video = (props) => {
           <div className={classes.videoContainer}>
             <div className={classes.video}>
               {stream && (
-                <video className={classes.myVideo}
+                <video
+                  className={classes.myVideo}
                   playsInline
                   muted
                   ref={myVideo}
@@ -119,7 +120,8 @@ const Video = (props) => {
             </div>
             <div className={classes.video}>
               {callAccepted && !callEnded ? (
-                <video className={classes.myVideo}
+                <video
+                  className={classes.myVideo}
                   playsInline
                   ref={userVideo}
                   autoPlay
@@ -129,45 +131,53 @@ const Video = (props) => {
           </div>
           <div className={classes.myId}>
             <TextField
-              id="filled-basic"
-              label="Name"
-              variant="filled"
+              id='filled-basic'
+              label='Name'
+              variant='filled'
               value={name}
               style={{ marginBottom: "20px" }}
             />
-            <CopyToClipboard text={me} style={{ marginBottom: "2rem" }}>
+            {/* <CopyToClipboard text={me} style={{ marginBottom: "2rem" }}>
               <Button
-                variant="contained"
-                color="primary"
-                startIcon={<AssignmentIcon fontSize="large" />}
+                variant='contained'
+                color='primary'
+                startIcon={<AssignmentIcon fontSize='large' />}
               >
                 Copy ID
               </Button>
-            </CopyToClipboard>
+            </CopyToClipboard> */}
+            <TextField
+              style={{ marginBottom: "20px" }}
+              id='filled-basic'
+              label='My ID'
+              variant='filled'
+              value={me}
+              onChange={(e) => setIdToCall(e.target.value)}
+            />
 
             <TextField
-              id="filled-basic"
-              label="ID to call"
-              variant="filled"
+              id='filled-basic'
+              label='ID to call'
+              variant='filled'
               value={idToCall}
               onChange={(e) => setIdToCall(e.target.value)}
             />
             <div className={classes.callButton}>
               {callAccepted && !callEnded ? (
                 <Button
-                  variant="contained"
-                  color="secondary"
+                  variant='contained'
+                  color='secondary'
                   onClick={leaveCall}
                 >
                   End Call
                 </Button>
               ) : (
                 <IconButton
-                  color="primary"
-                  aria-label="call"
+                  color='primary'
+                  aria-label='call'
                   onClick={() => callUser(idToCall)}
                 >
-                  <PhoneIcon fontSize="large" />
+                  <PhoneIcon fontSize='large' />
                 </IconButton>
               )}
               {idToCall}
@@ -178,8 +188,8 @@ const Video = (props) => {
               <div className={classes.caller}>
                 <h1>{name} is calling...</h1>
                 <Button
-                  variant="contained"
-                  color="primary"
+                  variant='contained'
+                  color='primary'
                   onClick={answerCall}
                 >
                   Answer
