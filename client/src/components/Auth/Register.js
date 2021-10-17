@@ -77,7 +77,7 @@ class Register extends Component {
             <input
               type='text'
               onChange={(e) => this.onChangeHandler(e)}
-              placeholder='Name'
+              placeholder='Firstname Lastname'
               name='name'
               value={this.state.name}
               required

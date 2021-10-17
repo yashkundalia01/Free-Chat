@@ -1,6 +1,5 @@
 import axios from "axios";
 import { setAlert } from "./index";
-import setAuthToken from "../../utils/setAuthToken";
 import {
   PROFILE_UPDATE_SUCCESS,
   PROFILE_UPDATE_FAIL,
@@ -12,12 +11,10 @@ import { logout } from "./auth";
 export const updateProfile =
   ({ status, location, bio, url }) =>
   async (dispatch) => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.token,
       },
     };
     const imageUrl = url;
@@ -45,9 +42,6 @@ export const updateProfile =
 //Get all Profiles
 
 export const getProfiles = () => async (dispatch) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
   const config = {
     headers: {
       "x-auth-token": localStorage.token,
@@ -60,10 +54,12 @@ export const getProfiles = () => async (dispatch) => {
 
 //Delete account
 export const deleteAccount = () => async (dispatch) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
-  await axios.delete("/api/profile");
+  const config = {
+    headers: {
+      "x-auth-token": localStorage.token,
+    },
+  };
+  await axios.delete("/api/profile", config);
   dispatch(setAlert("Account deleted successfully", "success"));
   dispatch(logout());
 };

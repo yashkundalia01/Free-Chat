@@ -1,6 +1,5 @@
 import axios from "axios";
 import { setAlert } from "./index";
-import setAuthToken from "../../utils/setAuthToken";
 import {
   REGISTER_FAIL,
   REGISTER_SUCCESS,
@@ -45,9 +44,6 @@ export const register =
 
 // Get Current User
 export const loadUser = () => async (dispatch) => {
-  if (localStorage.token) {
-    // setAuthToken(localStorage.token);
-  }
   try {
     const config = {
       headers: {

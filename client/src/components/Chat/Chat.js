@@ -1,7 +1,6 @@
 import "./Chat.css";
 import { Component } from "react";
 import axios from "axios";
-import setAuthToken from "../../utils/setAuthToken";
 import {
   ChatList,
   ChatCard,
@@ -42,13 +41,18 @@ class Chat extends Component {
 
   renderChatForm(creds) {
     return (
-      <div className="form123">
+      <div className='form123'>
         <input
           placeholder='Username'
           value={this.state.username}
           onChange={(e) => this.setUsername(e.target.value)}
         />
-        <button onClick={() => this.createDirectChat(creds)} className="btn12 btn12-primary">Create</button>
+        <button
+          onClick={() => this.createDirectChat(creds)}
+          className='btn12 btn12-primary'
+        >
+          Create
+        </button>
       </div>
     );
   }
