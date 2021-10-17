@@ -13,6 +13,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Chat from "./components/Chat/Chat";
 import Video from "./components/Video/Video";
 import Posts from "./components/Posts/PostForm/PostForm";
+import ChangePassword from "./components/ChangePassword/ChangePassword";
 
 class App extends Component {
   componentDidMount() {
@@ -35,6 +36,7 @@ class App extends Component {
                 <Route exact path='/chat' component={Chat} />
                 <Route exact path='/Post' component={Posts} />
                 <Route exact path='/video' component={Video} />
+                <Route exact path='/changepassword' component={ChangePassword} />
               </Switch>
             </section>
           </Layout>

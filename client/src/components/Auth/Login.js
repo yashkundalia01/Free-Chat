@@ -4,12 +4,12 @@ import "./style.css";
 import { connect } from "react-redux";
 import { login } from "../../store/actions/index";
 import Spinner from "../UI/Spinner/Spinner";
+import { START_LOADING, STOP_LOADING } from "../../store/actions/actionTypes";
 
 class Login extends Component {
   state = {
     email: "",
     password: "",
-    loading: false,
   };
 
   onChangeHandler = (e) =>
@@ -20,52 +20,51 @@ class Login extends Component {
 
   onSubmitHandler = (e) => {
     localStorage.setItem("password", this.state.password);
-    this.setState({ ...this.state, loading: true });
+    this.props.startLoader();
     e.preventDefault();
     try {
       this.props.loginUser(this.state.email, this.state.password);
     } catch (error) {
-      this.setState({ ...this.state, loading: false });
     }
   };
 
   render() {
     let loading = null;
-    if (this.state.loading) {
+    if (this.props.loading) {
       loading = <Spinner></Spinner>;
     }
     if (this.props.isAuthenticated) {
-      return <Redirect to='/dashboard' />;
+      return <Redirect to="/dashboard" />;
     }
     return (
       <div>
-        <div className='loading'>{loading}</div>
-        <h1 className='large text-primary'>Sign In</h1>
-        <p className='lead'>Sign into Your Account</p>
-        <form className='form' onSubmit={(e) => this.onSubmitHandler(e)}>
-          <div className='form-group'>
+        <div className="loading">{loading}</div>
+        <h1 className="large text-primary">Sign In</h1>
+        <p className="lead">Sign into Your Account</p>
+        <form className="form" onSubmit={(e) => this.onSubmitHandler(e)}>
+          <div className="form-group">
             <input
-              type='email'
-              placeholder='Email Address'
+              type="email"
+              placeholder="Email Address"
               onChange={(e) => this.onChangeHandler(e)}
-              name='email'
+              name="email"
               required
             />
           </div>
-          <div className='form-group'>
+          <div className="form-group">
             <input
-              type='password'
+              type="password"
               onChange={(e) => this.onChangeHandler(e)}
-              placeholder='Password'
-              name='password'
-              minLength='6'
+              placeholder="Password"
+              name="password"
+              minLength="6"
               required
             />
           </div>
-          <input type='submit' className='btn btn-primary' value='Login' />
+          <input type="submit" className="btn btn-primary" value="Login" />
         </form>
-        <p className='my-1'>
-          Don't have an account? <Link to='/register'>Sign Up</Link>
+        <p className="my-1">
+          Don't have an account? <Link to="/register">Sign Up</Link>
         </p>
       </div>
     );
@@ -74,11 +73,14 @@ class Login extends Component {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  loading: state.auth.loading,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     loginUser: (email, password) => dispatch(login(email, password)),
+    startLoader: () => dispatch({type: START_LOADING}),
+    stopLoader: () => dispatch({type: STOP_LOADING}),
   };
 };
 

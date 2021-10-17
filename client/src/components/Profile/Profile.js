@@ -59,7 +59,7 @@ class Profile extends Component {
 
   render() {
     if (!localStorage.token) {
-      return <Redirect to='/login' />;
+      return <Redirect to="/login" />;
     }
     let loading = null;
     if (this.state.loading) {
@@ -67,68 +67,71 @@ class Profile extends Component {
     }
     return (
       <div>
-        <div className='loading'>{loading}</div>
-        <h1 className='large text-primary'>Create Your Profile</h1>
-        <p className='lead'>
+        <div className="loading">{loading}</div>
+        <h1 className="large text-primary">Create Your Profile</h1>
+        <p className="lead">
           Let's get some information to make your profile good
         </p>
         <small>* = required field</small>
-        <form className='form' onSubmit={(e) => this.onSubmitHandler(e)}>
-          <div className='form-group'>
+        <form className="form" onSubmit={(e) => this.onSubmitHandler(e)}>
+          <div className="form-group">
             <input
               required
-              type='text'
-              placeholder='Status'
-              name='status'
+              type="text"
+              placeholder="Status"
+              name="status"
               onChange={(e) => this.onChangeHandler(e)}
             />
-            <small className='form-text'>
+            <small className="form-text">
               Give us an idea of where you are at in your career
             </small>
           </div>
 
-          <div className='form-group'>
+          <div className="form-group">
             <input
               required
-              type='text'
-              placeholder='Location'
-              name='location'
+              type="text"
+              placeholder="Location"
+              name="location"
               onChange={(e) => this.onChangeHandler(e)}
             />
-            <small className='form-text'>
+            <small className="form-text">
               City & state suggested (eg. Boston, MA)
             </small>
           </div>
 
-          <div className='form-group'>
+          <div className="form-group">
             <textarea
               required
-              placeholder='A short bio of yourself'
-              name='bio'
+              placeholder="A short bio of yourself"
+              name="bio"
               onChange={(e) => this.onChangeHandler(e)}
             ></textarea>
-            <small className='form-text'>Tell us a little about yourself</small>
+            <small className="form-text">Tell us a little about yourself</small>
           </div>
-          <div className='form-group'>
+          <div className="form-group">
             <input
-              type='file'
+              type="file"
               required
-              name='profileImage'
+              name="profileImage"
               onChange={(e) => this.onChangeHandler(e)}
             />
-            <small className='form-text'>Upload your profile image</small>
+            <small className="form-text">Upload your profile image</small>
           </div>
 
-          <input type='submit' className='btn btn-primary my-1' />
-          <Link className='btn btn-light my-1' to='/dashboard'>
+          <input type="submit" className="btn btn-primary my-1" />
+          <Link className="btn btn-light my-1" to="/dashboard">
             Go Dashboard
           </Link>
-          <a
-            className='btn btn-danger my-1'
+          <Link
+            className="btn btn-danger my-1" style={{background:'rgb(236, 39, 39)',color:'white'}}
             onClick={() => this.deleteAccount()}
           >
             Delete account
-          </a>
+          </Link>
+          <Link className="btn btn-secondary" to="/changepassword">
+            Change Password
+          </Link>
         </form>
       </div>
     );

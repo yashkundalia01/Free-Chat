@@ -8,6 +8,7 @@ import thunk from "redux-thunk";
 import alert from "./store/reducers/alert";
 import auth from "./store/reducers/auth";
 import profile from "./store/reducers/profile";
+import changePassword from "./store/reducers/changePassword";
 
 const composeEnhancer =
   process.env.NODE_ENV === "development"
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   alert: alert,
   auth: auth,
   profile: profile,
+  changePassword: changePassword,
 });
 
 const store = createStore(rootReducer, composeEnhancer(applyMiddleware(thunk)));

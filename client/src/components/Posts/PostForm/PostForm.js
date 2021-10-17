@@ -12,7 +12,8 @@ export default function PostForm(props) {
   const cuser = localStorage.getItem("name");
 
   function openForm() {
-    document.getElementById("myForm").style.display = "block";
+    let form = document.getElementById("myForm");
+    form.style.display = "block";
   }
 
   function HandlePost(e) {

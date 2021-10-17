@@ -10,3 +10,8 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 export const PROFILES_LOADED = "PROFILES_LOADED";
+export const START_LOADING = "START_LOADING";
+export const STOP_LOADING = "STOP_LOADING";
+
+export const START_UPDATING = "START_UPDATING";
+export const STOP_UPDATING = "STOP_UPDATING";

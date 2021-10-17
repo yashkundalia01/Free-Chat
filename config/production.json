@@ -1,5 +1,6 @@
 {
-  "mongoURI": "mongodb+srv://yash123:yash123@freechat.hqjcr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-
-  "jwtSecret": "mysecrettoken"
-}
+    "mongoURI": "mongodb+srv://yash123:yash123@freechat.hqjcr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  
+    "jwtSecret": "mysecrettoken"
+  }
+  

@@ -99,3 +99,10 @@ button {
   background: var(--danger-color);
   color: #fff;
 }
+
+.loading {
+  align-content: center;
+  top: 25%;
+  position: fixed;
+  left: 50%;
+}

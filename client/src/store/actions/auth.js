@@ -68,6 +68,7 @@ export const login = (email, password) => async (dispatch) => {
   const body = JSON.stringify({ email, password });
 
   try {
+    // returning token
     const res = await axios.post("/api/auth", body, config);
 
     dispatch({

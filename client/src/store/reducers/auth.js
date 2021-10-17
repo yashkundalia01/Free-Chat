@@ -6,11 +6,12 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  START_LOADING,
 } from "../actions/actionTypes";
 
 const initialState = {
   token: localStorage.getItem("token"),
-  loading: true,
+  loading: false,
   isAuthenticated: null,
   user: null,
 };
@@ -48,6 +49,12 @@ const reducer = (state = initialState, action) => {
         isAuthenticated: true,
         loading: false,
         user: action.payload,
+      };
+    }
+    case START_LOADING: {
+      return {
+        ...state,
+        loading: true
       };
     }
     default:
